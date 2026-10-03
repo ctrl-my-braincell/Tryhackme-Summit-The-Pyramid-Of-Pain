@@ -117,7 +117,9 @@ As you can see below, I denied an outbound connection to a suspicious destinatio
 
 ### What I Learned
 
-I've learned that not only can we create a firewall rule for internal and external server, but also any suspicious IP address that can be marked as a threat. But because the level is easy, attackers will find a way to change IP addresses in multiple ways they could as I mentioned earlier. Therefore, staying vigilant on this stage is a must. 
+I've learned that firewall rules are not only about allowing or denying traffic between internal and external systems, but can also be used to block suspicious outbound connections to known malicious IP addresses. In this case, choosing an egress rule made sense because `sample2.exe` was trying to communicate with an external destination.
+
+What also stood out to me is that IP-based detection is still easy for attackers to work around. They can rotate infrastructure, switch to another proxy or hosting provider, or simply move their command-and-control server to a new address. So while blocking the IP is useful, I learned that I should not rely on the IP alone and should keep looking for stronger indicators higher up the Pyramid of Pain.
 
 ---
 
