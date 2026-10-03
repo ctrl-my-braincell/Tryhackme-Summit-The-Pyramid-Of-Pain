@@ -48,9 +48,14 @@ I will now submit a hash value to the blocklist.
 
 ---
 
+After that, I will get my flag and to the next challenge. 
+Flag: `THM{f3cbf08151a11a6a331db9c6cf5f4fe4}`
+
+---
+
 ### What I Learned
 
-<!-- Write what Sample 1 taught you here. -->
+Attackers can modify metadata, append random junk data, or recompile their malware source code in seconds. Not only that, adding a simple space or using automated scripts can also re-hash and repackage malware instantly, and blocking an old hash will not stop them from doing it again!
 
 ---
 
