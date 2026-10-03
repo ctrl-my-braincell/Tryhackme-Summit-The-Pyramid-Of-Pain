@@ -64,6 +64,150 @@ The important question became:
 
 This helped connect the practical exercise back to the Pyramid of Pain.
 
+## Sample 1
+
+### What I Observed
+
+<!-- Write what you noticed about sample1.exe here. -->
+
+### Detection / Prevention
+
+<!-- Explain what you configured to detect or block the sample. -->
+
+### Pyramid of Pain Level
+
+<!-- Which level does this detection belong to, and why? -->
+
+### Attacker Adaptation
+
+<!-- How could the attacker change their approach to bypass this detection? -->
+
+### Evidence
+
+<!-- Add screenshots, rule details, or other evidence here. -->
+
+---
+
+## Sample 2
+
+### What I Observed
+
+<!-- Your notes here. -->
+
+### Detection / Prevention
+
+<!-- Your notes here. -->
+
+### Pyramid of Pain Level
+
+<!-- Your notes here. -->
+
+### Attacker Adaptation
+
+<!-- Your notes here. -->
+
+### Evidence
+
+<!-- Your evidence here. -->
+
+---
+
+## Sample 3
+
+### What I Observed
+
+<!-- Your notes here. -->
+
+### Detection / Prevention
+
+<!-- Your notes here. -->
+
+### Pyramid of Pain Level
+
+<!-- Your notes here. -->
+
+### Attacker Adaptation
+
+<!-- Your notes here. -->
+
+### Evidence
+
+<!-- Your evidence here. -->
+
+---
+
+## Sample 4
+
+### What I Observed
+
+<!-- Your notes here. -->
+
+### Detection / Prevention
+
+<!-- Your notes here. -->
+
+### Pyramid of Pain Level
+
+<!-- Your notes here. -->
+
+### Attacker Adaptation
+
+<!-- Your notes here. -->
+
+### Evidence
+
+<!-- Your evidence here. -->
+
+---
+
+## Sample 5
+
+### What I Observed
+
+<!-- Your notes here. -->
+
+### Detection / Prevention
+
+<!-- Your notes here. -->
+
+### Pyramid of Pain Level
+
+<!-- Your notes here. -->
+
+### Attacker Adaptation
+
+<!-- Your notes here. -->
+
+### Evidence
+
+<!-- Your evidence here. -->
+
+---
+
+## Sample 6
+
+### What I Observed
+
+<!-- Your notes here. -->
+
+### Detection / Prevention
+
+<!-- Your notes here. -->
+
+### Pyramid of Pain Level
+
+<!-- Your notes here. -->
+
+### Attacker Adaptation
+
+<!-- Your notes here. -->
+
+### Evidence
+
+<!-- Your evidence here. -->
+
+---
+
 ## Key Takeaway
 
 My biggest takeaway from this room was that **not all detections have the same long-term value**.
