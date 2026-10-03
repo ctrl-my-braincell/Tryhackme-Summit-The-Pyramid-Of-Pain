@@ -1,4 +1,4 @@
-# Practical Investigation
+<img width="1899" height="873" alt="image" src="https://github.com/user-attachments/assets/689a0836-085f-4a05-8bed-446986dcab71" /># Practical Investigation
 
 ## Sample 1 - Hash Value
 
@@ -63,27 +63,61 @@ Attackers can modify metadata, append random junk data, or recompile their malwa
 
 ### Scenario
 
-<!-- Add your Sample 2 context here. -->
+For sample2.exe, I will do the same step by uploading it to the Malware Sandbox.
+
+---
+### Malware Sample
+
+<img width="1870" height="825" alt="image" src="https://github.com/user-attachments/assets/0a6f3ecf-7904-4e5e-a7ba-e10cbf3d8d9a" />
+<img width="1220" height="604" alt="image" src="https://github.com/user-attachments/assets/46df0aa5-5322-42c5-8255-3d8366df14fe" />
+
+---
 
 ### Analysis
 
-<!-- Add what you analyzed here. -->
+On the network activity, there is: 
+
+**1 HTTP(S) requests** 
+
+**3 TCP/UDP connections**
+
+**0 DNS requests**
+
+**0 Threats**
+
+Let's look at HTTP requests and connections
+
+### HTTP Requests
+
+| PID | Process | Method | IP | URL |
+|---|---|---|---|---|
+| 1927 | `sample2.exe` | GET | `154.35.10.113:4444` | `http://154.35.10.113:4444/uvLk8YI32` |
+
+
+### Connections
+
+| PID | Process | IP | Domain | ASN |
+|---|---|---|---|---|
+| 1927 | `sample2.exe` | `154.35.10.113:4444` | - | Intrabuzz Hosting Limited |
+| 1927 | `sample2.exe` | `40.97.128.3:443` | - | Microsoft Corporation |
+| 1927 | `sample2.exe` | `40.97.128.4:443` | - | Microsoft Corporation |
+
 
 ### Pyramid of Pain
 
-<!-- Explain which Pyramid of Pain level this sample belongs to and why. -->
+For this pyramid of pain methodology, I will classify it as IP Address (lvl easy). It was classified as easy because attackers/threat actors could rotate these quickly using proxy services, fast-flux networks, or new ISP leases. Therefore, blocking them would also lead them to excitement! 
 
 ### Detection and Prevention
 
-<!-- Explain what you configured or blocked here. -->
+As you can see below, I denied an outbound connection to a suspicious destination IP. Why? An outbound connection to a suspicious IP usually indicates that an internal server or device is trying to communicate with a known malicious external destination. Therefore, Egress is a choice I made. 
 
 ### Evidence
 
-<!-- Add your screenshots here. -->
+<img width="1899" height="873" alt="image" src="https://github.com/user-attachments/assets/2d017ff9-8708-4423-b7c0-2e6d1f5fb692" />
 
 ### What I Learned
 
-<!-- Write what Sample 2 taught you here. -->
+I've learned that not only can we create a firewall rule for internal and external server, but also any suspicious IP address that can be marked as a threat. But because the level is easy, attackers will find a way to change IP addresses in multiple ways they could as I mentioned earlier. Therefore, staying vigilant on this stage is a must. 
 
 ---
 
