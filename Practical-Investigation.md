@@ -180,33 +180,47 @@ A malicious destination may be represented by both an IP address and a domain na
 
 ---
 
-## Sample 4
-
-> **Investigation status:** Pending analysis.
+## Sample 4 - Host Artifacts
 
 ### Scenario
 
-<!-- Add your Sample 4 context here. -->
+Sphinx's next challenge focused on artifacts left on the victim's host, rather than only the malware's file hash or network infrastructure. I uploaded `sample4.exe` to the lab's malware sandbox and examined its host activity.
 
 ### Analysis
 
-<!-- Add what you analyzed here. -->
+The sandbox's registry activity included a particularly important event:
+
+| Field | Observed value |
+|---|---|
+| Process | `sample4.exe` |
+| Operation | Registry write |
+| Key | `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection` |
+| Value name | `DisableRealtimeMonitoring` |
+| Value data | `1` |
+
+Other registry events involved `explorer.exe` writing `EnableBalloonTips` and `notepad.exe` reading `Progid`. The Defender-related write was the priority because it targeted a security control.
+
+**Analyst reasoning:** A write to `DisableRealtimeMonitoring` with data `1` is consistent with an attempt to disable Microsoft Defender's real-time monitoring. This is evidence of attempted **defense evasion**, but the sandbox event alone does not prove Defender was successfully disabled; system protection state and tamper protection would need separate verification.
 
 ### Pyramid of Pain
 
-<!-- Explain which Pyramid of Pain level this sample belongs to and why. -->
+**Level: Host Artifacts.** This detection focuses on an action performed on the endpoint. Even if the attacker changes the file hash, IP address, or domain, a repeat attempt to modify the same Defender registry value could still trigger a host-based detection. An attacker would have to change their behavior or technique to avoid it.
 
 ### Detection and Prevention
 
-<!-- Explain what you configured or blocked here. -->
+The appropriate defensive approach is a host-based rule monitoring suspicious writes to the Defender real-time protection registry setting, with attention to the process responsible and the value written. This should be investigated in context to avoid false positives from authorized administration.
+
+**Lab completion:** The Sample 4 flag was obtained. The exact rule configuration and test confirmation were not recorded in the evidence available for this write-up, so they are not claimed here.
+
+**Flag:** `THM{c956f455fc076aea829799c0876ee399}`
 
 ### Evidence
 
-<!-- Add your screenshots here. -->
+The sandbox screenshots supplied during the investigation show the sample and registry activity. Repository-hosted screenshot links can be added later.
 
 ### What I Learned
 
-<!-- Write what Sample 4 taught you here. -->
+Host artifacts reveal what a program does *on the machine*, not just where it communicates. A suspicious registry write can indicate defense evasion and may remain detectable even after network indicators change. I also learned to distinguish an **attempted** security-setting modification from proof that protection was actually disabled.
 
 ---
 
