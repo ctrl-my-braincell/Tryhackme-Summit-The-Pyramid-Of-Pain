@@ -170,6 +170,8 @@ In **IOC Management → DNS Rule Manager**, I created a rule with these settings
 
 The application displayed a success message confirming that the DNS rule prevented `sample3.exe` from connecting to the tester's command-and-control server. This confirms the outcome in the simulated environment, not a guarantee against all variants of the malware.
 
+**Flag:** `THM{4eca9e2f61a19ecd5df34c788e7dce16}`
+
 ### Evidence
 
 Screenshots from the investigation showed the Sphinx email, sandbox behavior summary, HTTP/connection/DNS tables, and the successful DNS deny rule. These can be added as repository-hosted image links in a later pass.
