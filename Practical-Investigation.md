@@ -287,30 +287,55 @@ I learned how to recognize a possible beaconing pattern by correlating destinati
 
 ---
 
-## Sample 6
-
-> **Investigation status:** Pending analysis.
+## Sample 6 - Tactics, Techniques and Procedures (TTPs)
 
 ### Scenario
 
-<!-- Add your Sample 6 context here. -->
+In the final challenge, Sphinx explained that the previous detection forced changes to their attack tools and methodology. The task was to identify a repeatable behavior from `commands.log`, a record of commands used across earlier samples, and build a detection for that activity.
 
 ### Analysis
 
-<!-- Add what you analyzed here. -->
+The log showed a sequence of Windows commands used to inspect the host and its environment:
+
+| Observed command | Investigative significance |
+|---|---|
+| `dir c:\` and directory listings | Enumerates accessible directories |
+| `net localgroup administrator` | Attempts to enumerate local group membership |
+| `ver` and `systeminfo` | Collects operating system and host details |
+| `ipconfig /all` | Collects network configuration |
+| `netstat -ano` | Lists network connections and related process IDs |
+| `net start` | Lists started services |
+
+The commands repeatedly appended output using `>>` to `%temp%\exfiltr8.log`. This creates a consolidated local record that could be reviewed or transferred later.
+
+**Analyst reasoning:** The commands show **host and network discovery**, plus local collection of results. The name `exfiltr8.log` suggests a possible exfiltration objective, but the supplied log does not demonstrate that the file was actually sent outside the host. Some commands can also be used legitimately by administrators, so context matters.
 
 ### Pyramid of Pain
 
-<!-- Explain which Pyramid of Pain level this sample belongs to and why. -->
+**Level: Tactics, Techniques and Procedures (TTPs).** The focus is on the attacker's recurring discovery and collection workflow, rather than only a hash or network destination. Changing a workflow can be more costly than changing infrastructure. The lab's specific rule still relies on a literal output filename, so a filename change could evade this implementation; broader behavioral correlation would be stronger.
 
 ### Detection and Prevention
 
-<!-- Explain what you configured or blocked here. -->
+I used **IOC Management → Sigma Rule Builder**, selected **Sysmon Event Logs**, then **Process Creation**, and configured:
+
+| Field | Value |
+|---|---|
+| Process Name | `cmd.exe` |
+| CommandLine operator | `Contains` |
+| String | `%temp%\exfiltr8.log` |
+| ATT&CK tactic selected | `Exfiltration (TA0010)` |
+
+**Validation result: Success.** PicoSecure accepted the rule.
+
+**ATT&CK interpretation:** The chosen lab label was Exfiltration (TA0010), while the observed commands directly support Discovery (TA0007) and collection of output into a local file. No outbound transfer is visible in the provided evidence. A real detection should also account for how command lines are represented in Sysmon logs and whether the literal string is present.
 
 ### Evidence
 
-<!-- Add your screenshots here. -->
+<!-- Sample 6 screenshots will be attached here later. Do not remove existing evidence images in other sections. -->
+
+Pending image uploads: Sphinx email and `commands.log`; Sigma Rule Builder event source; Process Creation selection; configured detection rule and validation result.
 
 ### What I Learned
 
-<!-- Write what Sample 6 taught you here. -->
+I learned to recognize an attacker's repeatable workflow from a sequence of commands. Multiple discovery commands redirecting results into one file are more informative together than any single command. I also learned to distinguish local collection from confirmed exfiltration and to test a detection rule rather than assuming it works.
+
