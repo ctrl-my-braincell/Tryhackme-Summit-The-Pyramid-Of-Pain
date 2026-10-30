@@ -123,33 +123,60 @@ What also stood out to me is that IP-based detection is still easy for attackers
 
 ---
 
-## Sample 3
-
-> **Investigation status:** Pending analysis. Record observations before deciding which Pyramid of Pain level applies.
+## Sample 3 - Domain Name
 
 ### Scenario
 
-<!-- Add your Sample 3 context here. -->
+Sphinx reported that the previous IP-based block had disrupted the malware, but that the simulated attacker could move to another public IP address. The next task was to investigate `sample3.exe` and identify a more durable network indicator.
 
 ### Analysis
 
-<!-- Record the observed indicators (e.g., network, process or host artifacts), the evidence supporting them, and what remains uncertain. -->
+The PicoSecure malware sandbox reported `sample3.exe` as a Windows executable tagged `Trojan.Metasploit.A`. Its behavior summary flagged Metasploit activity, unusual network connections, and executable downloads. These are sandbox findings, not independent proof of every stage of compromise.
+
+| Evidence | Observation |
+|---|---|
+| HTTP requests | 2 |
+| TCP/UDP connections | 4 |
+| DNS requests | 2 |
+| Reported threats counter | 0 |
+| Suspicious domain | `emudyn.bresonicz.info` |
+| Resolved IP | `62.123.140.9` |
+| Process | `sample3.exe` (PID 1021) |
+| Additional process | `backdoor.exe` (PID 2712) |
+
+The HTTP request log showed two GET requests by `sample3.exe`:
+
+- `http://emudyn.bresonicz.info:1337/kzn293la`
+- `http://emudyn.bresonicz.info/backdoor.exe`
+
+The connection table also linked `backdoor.exe` to `62.123.140.9:80`. A connection to `services.microsoft.com` was listed separately; the evidence does not establish that Microsoft infrastructure was malicious.
+
+**Reasoning:** The domain appeared in DNS resolution, HTTP requests, and connection records associated with the simulated malware. The executable download behavior strengthened the case for blocking this destination within the exercise. The HTTP logs alone do not establish the contents of the downloaded file or prove successful command execution.
 
 ### Pyramid of Pain
 
-<!-- Classify the indicator based on observed evidence. Explain how difficult it would be for an attacker to change. -->
+**Level: Domain Names.** Unlike a single IP address, a domain may remain consistent even when its backing IP changes. Blocking it can disrupt the attacker's ability to reuse that hostname, although attackers can register or switch to another domain. DNS blocking can also be bypassed by direct-IP communication or alternative name resolution.
 
 ### Detection and Prevention
 
-<!-- Record the exact defensive action taken in the lab and why it follows from the evidence. -->
+In **IOC Management → DNS Rule Manager**, I created a rule with these settings:
+
+| Field | Value |
+|---|---|
+| Rule name | `Backdoor domain` |
+| Category | `Other` |
+| Domain name | `emudyn.bresonicz.info` |
+| Action | `Deny` |
+
+The application displayed a success message confirming that the DNS rule prevented `sample3.exe` from connecting to the tester's command-and-control server. This confirms the outcome in the simulated environment, not a guarantee against all variants of the malware.
 
 ### Evidence
 
-<!-- Add your screenshots here. -->
+Screenshots from the investigation showed the Sphinx email, sandbox behavior summary, HTTP/connection/DNS tables, and the successful DNS deny rule. These can be added as repository-hosted image links in a later pass.
 
 ### What I Learned
 
-<!-- Write what Sample 3 taught you here. -->
+A malicious destination may be represented by both an IP address and a domain name. IP blocking can help immediately, but attackers can move their server to another IP. Investigating DNS, HTTP, and process evidence together can reveal a hostname worth blocking. I also learned to separate the sandbox's detection labels from behavior I can directly verify, and to confirm that a defensive rule actually took effect.
 
 ---
 
