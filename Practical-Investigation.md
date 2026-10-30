@@ -327,6 +327,8 @@ I used **IOC Management → Sigma Rule Builder**, selected **Sysmon Event Logs**
 
 **Validation result: Success.** PicoSecure accepted the rule.
 
+**Final flag:** `THM{c8951b2ad24bbcbac60c16cf2c83d92c}`
+
 **ATT&CK interpretation:** The chosen lab label was Exfiltration (TA0010), while the observed commands directly support Discovery (TA0007) and collection of output into a local file. No outbound transfer is visible in the provided evidence. A real detection should also account for how command lines are represented in Sysmon logs and whether the literal string is present.
 
 ### Evidence
