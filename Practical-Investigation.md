@@ -218,7 +218,14 @@ The appropriate defensive approach is a host-based rule monitoring suspicious wr
 
 ### Evidence
 
-The sandbox screenshots supplied during the investigation show the sample and registry activity. Repository-hosted screenshot links can be added later.
+Four original screenshots from this investigation have been recovered from the chat and prepared for upload under `evidence/sample4/`:
+
+1. `sample4-sphinx-email.png` — Sphinx's host-artifact challenge.
+2. `sample4-sandbox-behavior.png` — sandbox behavior analysis.
+3. `sample4-network-activity.png` — HTTP, connection, and DNS evidence.
+4. `sample4-registry-activity.png` — Defender registry write and other registry events.
+
+**Image upload pending:** These screenshots are preserved in a separate recovery ZIP but have not yet been uploaded into this repository. Image links should be added only after upload so the README does not display broken images.
 
 ### What I Learned
 
