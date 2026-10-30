@@ -124,6 +124,11 @@ What also stood out to me is that IP-based detection is still easy for attackers
 ---
 
 ## Sample 3 - Domain Name
+---
+
+<img width="1274" height="622" alt="image" src="https://github.com/user-attachments/assets/bbe61eb5-d051-433d-9bcd-035c727dcee4" />
+
+---
 
 ### Scenario
 
@@ -174,7 +179,18 @@ The application displayed a success message confirming that the DNS rule prevent
 
 ### Evidence
 
-Screenshots from the investigation showed the Sphinx email, sandbox behavior summary, HTTP/connection/DNS tables, and the successful DNS deny rule. These can be added as repository-hosted image links in a later pass.
+---
+
+<img width="1220" height="759" alt="image" src="https://github.com/user-attachments/assets/ae59f8b3-3c4a-49a5-9d32-dce5b134f840" />
+<img width="1218" height="592" alt="image" src="https://github.com/user-attachments/assets/bb539b96-f5dd-446e-9c33-27194034bfbb" />
+<img width="1205" height="214" alt="image" src="https://github.com/user-attachments/assets/90a8b8dd-61a6-451e-bd08-d2dc05aa653b" />
+
+---
+
+<img width="1916" height="887" alt="image" src="https://github.com/user-attachments/assets/20811f68-5672-4a68-8c92-771e1ad0bd1d" />
+
+---
+
 
 ### What I Learned
 
@@ -183,6 +199,11 @@ A malicious destination may be represented by both an IP address and a domain na
 ---
 
 ## Sample 4 - Host Artifacts
+---
+
+<img width="1228" height="600" alt="image" src="https://github.com/user-attachments/assets/82ca5973-590c-438a-a68b-b8d70400ddc4" />
+
+---
 
 ### Scenario
 
@@ -218,14 +239,17 @@ The appropriate defensive approach is a host-based rule monitoring suspicious wr
 
 ### Evidence
 
-Four original screenshots from this investigation have been recovered from the chat and prepared for upload under `evidence/sample4/`:
+<img width="1879" height="838" alt="image" src="https://github.com/user-attachments/assets/b0f2d515-0bec-46b1-88c9-07a28d2afe69" />
+<img width="1230" height="550" alt="image" src="https://github.com/user-attachments/assets/8c3384bd-373d-49cb-9973-06795fecc20b" />
+<img width="1273" height="672" alt="image" src="https://github.com/user-attachments/assets/7c4432a0-3d54-4d6d-ad34-007bf9bc476d" />
 
-1. `sample4-sphinx-email.png` — Sphinx's host-artifact challenge.
-2. `sample4-sandbox-behavior.png` — sandbox behavior analysis.
-3. `sample4-network-activity.png` — HTTP, connection, and DNS evidence.
-4. `sample4-registry-activity.png` — Defender registry write and other registry events.
+---
+<img width="769" height="680" alt="image" src="https://github.com/user-attachments/assets/6eac97ee-f61a-457b-a2da-3ee59d1c45ab" />
+<img width="756" height="582" alt="image" src="https://github.com/user-attachments/assets/5fa5a131-3a6c-47d9-9b00-8828e83f94e5" />
+<img width="762" height="423" alt="image" src="https://github.com/user-attachments/assets/8f101fac-b51d-486d-b6a2-cbd3d34f5680" />
 
-**Image upload pending:** These screenshots are preserved in a separate recovery ZIP but have not yet been uploaded into this repository. Image links should be added only after upload so the README does not display broken images.
+
+
 
 ### What I Learned
 
@@ -326,8 +350,6 @@ I used **IOC Management → Sigma Rule Builder**, selected **Sysmon Event Logs**
 | ATT&CK tactic selected | `Exfiltration (TA0010)` |
 
 **Validation result: Success.** PicoSecure accepted the rule.
-
-**Final flag:** `THM{c8951b2ad24bbcbac60c16cf2c83d92c}`
 
 **ATT&CK interpretation:** The chosen lab label was Exfiltration (TA0010), while the observed commands directly support Discovery (TA0007) and collection of output into a local file. No outbound transfer is visible in the provided evidence. A real detection should also account for how command lines are represented in Sysmon logs and whether the literal string is present.
 
