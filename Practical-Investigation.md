@@ -226,33 +226,57 @@ Host artifacts reveal what a program does *on the machine*, not just where it co
 
 ---
 
-## Sample 5
-
-> **Investigation status:** Pending analysis.
+## Sample 5 - Network Artifacts
 
 ### Scenario
 
-<!-- Add your Sample 5 context here. -->
+Sphinx explained that the new sample relied on server-side functionality and could change its infrastructure and host artifacts. The task was to identify abnormal network behavior rather than block a particular hash, IP address, or domain. The email provided an attachment named `outgoing_connections.log` containing the victim host's outbound connections.
 
 ### Analysis
 
-<!-- Add what you analyzed here. -->
+The log showed repeated connections from `10.10.15.12` to `51.102.10.19` on port `443`, with each recorded connection showing **97 bytes**. Entries occurred at **30-minute intervals**, including 09:00, 09:30, 10:00, and 10:30.
+
+| Observed feature | Evidence |
+|---|---|
+| Source host | `10.10.15.12` |
+| Repeated destination | `51.102.10.19` |
+| Destination port in the log | `443` |
+| Recorded size | `97 bytes` |
+| Interval | `1800 seconds (30 minutes)` |
+| Additional activity | Other destinations and varied sizes occurred between the repeated connections |
+
+**Reasoning:** The regular interval and consistent size are consistent with possible **beaconing**. They do not independently prove command-and-control traffic, since legitimate applications can also communicate periodically. The exercise's simulated attacker context makes the pattern worth targeting.
 
 ### Pyramid of Pain
 
-<!-- Explain which Pyramid of Pain level this sample belongs to and why. -->
+**Level: Network Artifacts.** The detection uses recurring communication characteristics rather than one fixed destination. Changing the IP address or port alone would not necessarily avoid this rule; the attacker may need to change the beacon timing or traffic characteristics.
 
 ### Detection and Prevention
 
-<!-- Explain what you configured or blocked here. -->
+In the PicoSecure rule builder, I created a network-connection detection rule using the following fields:
+
+| Field | Configured value |
+|---|---|
+| Remote IP | `Any` |
+| Remote Port | `Any` |
+| Size (bytes) | `97` |
+| Frequency (seconds) | `1800` |
+| MITRE ATT&CK tactic | `Command and Control (TA0011)` |
+
+**Validation result: Success.** The lab accepted the rule configuration.
+
+**Implementation note:** Standard Sysmon network connection Event ID 3 does not natively expose payload byte counts or a 30-minute frequency calculation. A real-world equivalent would need supporting network telemetry and/or correlation logic. Broad IP/port matching may also generate false positives.
+
+**Flag:** `THM{46b21c4410e47dc5729ceadef0fc722e}`
 
 ### Evidence
 
-<!-- Add your screenshots here. -->
+The investigation screenshots show the email, outgoing connection log, and rule configuration. Preserve any existing embedded evidence images; new screenshots can be linked once uploaded to the repository.
+
 
 ### What I Learned
 
-<!-- Write what Sample 5 taught you here. -->
+I learned how to recognize a possible beaconing pattern by correlating destination, connection size, and timing. Instead of relying on a specific IP or domain, I can build a behavior-focused rule that may remain useful when infrastructure changes. I also need to verify suspicious patterns against legitimate periodic traffic before applying production blocking.
 
 ---
 
