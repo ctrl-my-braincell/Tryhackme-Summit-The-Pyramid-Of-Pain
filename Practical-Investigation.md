@@ -258,6 +258,8 @@ Host artifacts reveal what a program does *on the machine*, not just where it co
 ---
 
 ## Sample 5 - Network Artifacts
+<img width="1919" height="898" alt="image" src="https://github.com/user-attachments/assets/20324c8a-2e07-4592-b50f-e6d5763f7c94" />
+
 
 ### Scenario
 
@@ -302,7 +304,11 @@ In the PicoSecure rule builder, I created a network-connection detection rule us
 
 ### Evidence
 
-The investigation screenshots show the email, outgoing connection log, and rule configuration. Preserve any existing embedded evidence images; new screenshots can be linked once uploaded to the repository.
+<img width="1877" height="853" alt="image" src="https://github.com/user-attachments/assets/95e4281b-01fc-46ec-9e0c-f7feaa23947d" />
+<img width="1232" height="817" alt="image" src="https://github.com/user-attachments/assets/56bbd12c-c4b6-40a2-812c-7df1570c688a" />
+<img width="1225" height="398" alt="image" src="https://github.com/user-attachments/assets/3f61875a-de71-48f4-9525-10ea679cbb71" />
+
+
 
 
 ### What I Learned
