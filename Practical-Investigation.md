@@ -32,7 +32,7 @@ Submit for analysis to scan the malware and gather the evidence contained.
 
 Following the pyramid of pain methodology, this technique belongs to Hash Values (lvl easy).
 
-It is a unique file signatures like MD5 or SHA-256. Why is it easy? Because attackers can change them instantly by recompiling and modifying a single bit of code.
+A file hash, such as MD5 or SHA-256, is a fingerprint derived from file contents. It can identify an exact known sample, but changing the file bytes generally changes the hash. An attacker may evade a hash-only block by repacking or modifying the sample.
 
 ---
 
@@ -83,7 +83,7 @@ On the network activity, there is:
 
 **0 DNS requests**
 
-**0 Threats**
+**0 Threats reported by the sandbox**
 
 Let's look at HTTP requests and connections
 
@@ -105,11 +105,11 @@ Let's look at HTTP requests and connections
 
 ### Pyramid of Pain
 
-For this pyramid of pain methodology, I will classify it as IP Address (lvl easy). It was classified as easy because attackers/threat actors could rotate these quickly using proxy services, fast-flux networks, or new ISP leases. Therefore, blocking them would also lead them to excitement! 
+For this pyramid of pain methodology, I will classify it as IP Address (lvl easy). It was classified as easy because attackers/threat actors could rotate these quickly using proxy services, fast-flux networks, or new ISP leases. Therefore, blocking an IP can disrupt communication temporarily, but attackers may migrate to another address. 
 
 ### Detection and Prevention
 
-As you can see below, I denied an outbound connection to a suspicious destination IP. Why? An outbound connection to a suspicious IP usually indicates that an internal server or device is trying to communicate with a known malicious external destination. Therefore, Egress is a choice I made. 
+As you can see below, I denied an outbound connection to a suspicious destination IP. Why? An outbound connection indicates that a local process is communicating with an external destination. In this lab, the sandbox associated `sample2.exe` with the destination `154.35.10.113:4444`, so I chose an egress rule to block traffic leaving the environment for that destination. The connection alone does not prove C2 activity; its context within the simulation makes it the indicator selected for containment. 
 
 ### Evidence
 
@@ -125,21 +125,23 @@ What also stood out to me is that IP-based detection is still easy for attackers
 
 ## Sample 3
 
+> **Investigation status:** Pending analysis. Record observations before deciding which Pyramid of Pain level applies.
+
 ### Scenario
 
 <!-- Add your Sample 3 context here. -->
 
 ### Analysis
 
-<!-- Add what you analyzed here. -->
+<!-- Record the observed indicators (e.g., network, process or host artifacts), the evidence supporting them, and what remains uncertain. -->
 
 ### Pyramid of Pain
 
-<!-- Explain which Pyramid of Pain level this sample belongs to and why. -->
+<!-- Classify the indicator based on observed evidence. Explain how difficult it would be for an attacker to change. -->
 
 ### Detection and Prevention
 
-<!-- Explain what you configured or blocked here. -->
+<!-- Record the exact defensive action taken in the lab and why it follows from the evidence. -->
 
 ### Evidence
 
@@ -152,6 +154,8 @@ What also stood out to me is that IP-based detection is still easy for attackers
 ---
 
 ## Sample 4
+
+> **Investigation status:** Pending analysis.
 
 ### Scenario
 
@@ -181,6 +185,8 @@ What also stood out to me is that IP-based detection is still easy for attackers
 
 ## Sample 5
 
+> **Investigation status:** Pending analysis.
+
 ### Scenario
 
 <!-- Add your Sample 5 context here. -->
@@ -208,6 +214,8 @@ What also stood out to me is that IP-based detection is still easy for attackers
 ---
 
 ## Sample 6
+
+> **Investigation status:** Pending analysis.
 
 ### Scenario
 
